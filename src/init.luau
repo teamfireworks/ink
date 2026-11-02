@@ -7,6 +7,7 @@ const clip = require("@self/layout/clip")
 const color = require("@self/animation/color")
 const compose = require("@self/layout/compose")
 const context = require("@self/state/context")
+local destruction = require("@self/state/destruction")
 const distribute = require("@self/rects/distribute")
 const every = require("@self/timing/every")
 const expensive = require("@self/state/expensive")
@@ -148,6 +149,9 @@ ink.scope = scope.new
 ink.context = context.new
 ink.expensive = expensive
 ink.async = async
+ink.destroy_methods = destruction.destroy_methods
+ink.destroy_types = destruction.destroy_types
+ink.destroy = destruction.destroy
 
 -- Render
 ink.renderer = renderer.new
