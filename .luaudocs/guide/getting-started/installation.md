@@ -5,7 +5,7 @@ sidebar_position: 2
 
 # Installation
 
-## Ember
+## From Ember
 
 Ink is published on the Ember package registry: <https://emberpm.dev/package/teamfireworks/ink>
 
@@ -23,7 +23,10 @@ ink = { name = "teamfireworks/ink", version = "^" }
 
 ::: note
 
-Ink will not be officially cross-published on other package managers out of
-courtesy.
+Ink will not be officially repackaged for other package managers due to the sheer amount of maintainance work required.
 
 :::
+
+## From GitHub Releases
+
+## From Creator Store

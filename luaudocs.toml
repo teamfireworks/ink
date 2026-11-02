@@ -16,7 +16,7 @@ footer = { copyright = "Copyright © 2026 Team Fireworks Games" }
 
 [[site.nav]]
 text = "Guide"
-link = "/guide/introduction"
+link = "/guide/getting-started/introduction"
 activeMatch = "^/guide/"
 
 [[site.nav]]

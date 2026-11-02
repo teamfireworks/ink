@@ -5,6 +5,12 @@ sidebar_position: 4
 
 # Mounting
 
+::: warning
+
+This page was written prior to version `0.1.0-rc.5` which introduced some breaking changes. Documentation may be outdated!
+
+:::
+
 ```luau
 -- Ink is set up with three independent parts, being the scope, the renderer,
 -- and the intents.

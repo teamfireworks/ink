@@ -6,8 +6,8 @@ hero:
     tagline: "Roblox UI beyond instance trees"
     actions:
         - theme: brand
-          text: Get Started
-          link: /guide/introduction
+          text: Guides
+          link: /guide/getting-started/introduction
         - theme: alt
           text: API Reference
           link: /api/

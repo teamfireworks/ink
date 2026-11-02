@@ -1,14 +1,16 @@
 ---
-title: Storybooks
-sidebar_position: 99
+title: Developer Tools
+sidebar_position: 3
 ---
 
-# Storybooks
+# Developer Tools
+
+## Storybooks
 
 Ink supports several storybook plugins on Roblox that allow you to preview and
 hot-reload your UI components.
 
-## UI Labs
+### UI Labs
 
 Construct your story with `ink.ui_labs_story`:
 
@@ -19,7 +21,7 @@ return ink.ui_labs_story({
 	},
 	render = function(properties)
 		local btn = button(properties.scope:key("btn"), properties.controls.label)
-		btn = ink.align(btn, properties.target_bounds, 0.5, 0.5)
+		btn = ink.align(btn, properties.target_bounds, ink.ALIGN_MID, ink.ALIGN_MID)
 		return btn
 	end
 })
@@ -40,7 +42,7 @@ return ink.ui_labs_story({
 	controls = CONTROLS,
 	render = function(properties: ink.StoryProperties<typeof(CONTROLS)>)
 		local btn = button(properties.scope:key("btn"), properties.controls.label)
-		btn = ink.align(btn, properties.target_bounds, 0.5, 0.5)
+		btn = ink.align(btn, properties.target_bounds, ink.ALIGN_MID, ink.ALIGN_MID)
 		return btn
 	end
 })
@@ -48,10 +50,20 @@ return ink.ui_labs_story({
 
 :::
 
-## Flipbook
+### Hoarcekat
 
-::: note
+Construct your story with `ink.hoarcekat_story`:
 
-Coming before 0.1.0
+```luau
+return ink.hoarcekat_story({
+	render = function(properties: ink.StoryPropertie)
+		local btn = button(properties.scope:key("btn"), "Continue Game")
+		btn = ink.align(btn, properties.target_bounds, ink.ALIGN_MID, ink.ALIGN_MID)
+		return btn
+	end
+})
+```
 
-:::
+### Flipbook
+
+Girl, I'm really sorry but just use UI Labs ✌️

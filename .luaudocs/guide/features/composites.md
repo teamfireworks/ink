@@ -1,9 +1,15 @@
 ---
 title: Composites
-sidebar_position: 4
+sidebar_position: 1
 ---
 
 # Composites
+
+::: warning
+
+This page was written prior to version `0.1.0-rc.5` which introduced some breaking changes. Documentation may be outdated!
+
+:::
 
 ```luau
 -- Everything Ink draws is a `Composite`, being a flat list of shapes with some

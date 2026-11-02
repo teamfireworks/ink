@@ -6,9 +6,9 @@
 
 <h3><a href="https://teamfireworks.github.io/ink">Documentation →</a></h3>
 
-Ink is an immediate-mode UI library for Roblox. Build composites from simple
-shapes, lay them out with plain functions, and animate anything, all blazingly
-fast without fighting the instance tree.
+Ink is an immediate-mode UI library for Roblox. You build composites from simple
+shapes, lay them out with plain functions, and animate anything, without
+fighting the instance tree.
 
 <h2>Example Code</h2>
 
