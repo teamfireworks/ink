@@ -12,11 +12,11 @@ subject to breaking changes as needed. Documentation is also a work in progress!
 
 :::
 
-Ink is an immediate-mode UI library for Roblox. You build composites from simple
+Ink is an immediate-mode UI library for Roblox. Build composites from simple
 shapes, lay them out with plain functions, and animate anything, without
 fighting the instance tree.
 
-That's a lot in one sentence, so let's take it piece by piece.
+That's a lot in one sentence, so let's break it down.
 
 ## Ink is immediate-mode
 
