@@ -14,25 +14,25 @@ fighting the instance tree.
 
 ```luau
 local function button(s: ink.Scope, label: string, on_click: () -> ())
-	local content = ink.pad_xy(ink.text(label, STYLE, WHITE), 16, 8)
-	local hot, spot = ink.hotspot(s:key("hit"), content.bounds)
+	local content = ink.pad_xy(ink.text(label, STYLE, WHITE), ink.rem(s, 1), ink.rem(s, 0.75))
+	local hit = ink.hit_region(s:key("hit"), content.bounds)
 
-	if hot.clicked then
+	if hit.clicked then
 		on_click()
 	end
 
     local bg_color = if hit.state == Enum.GuiState.Hover then LIGHT else DARK
-	local bg = ink.tween(s:key("bg"), bg_color, 0.15)
+	local bg = ink.tween(s:key("bg"), bg_color, 0.15, Enum.EasingStyle.Quart)
 
-	return ink.compose({ ink.solid(content.bounds, bg), content, spot })
+	return ink.compose({ ink.solid(content.bounds, bg), content, hit }, content.bounds)
 end
 
 local function ui()
     local menu = ink.v_stack({
         button(scope:key("play"), "Play", play),
         button(scope:key("settings"), "Settings", open_settings),
-    }, 8, 0.5)
+    }, 8, ink.ALIGN_MID)
 
-    return ink.align(menu, viewport, 0.5, 0.5)
+    return ink.align(menu, viewport, ink.ALIGN_MID, ink.ALIGN_MID)
 end
 ```
