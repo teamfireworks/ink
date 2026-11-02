@@ -7,7 +7,7 @@ const function new(): types.TextField
 	const self = {
 		primitives = nil,
 		bounds = Rect.new(),
-		value = nil :: string?,
+		value = nil,
 		selection_start = -1,
 		cursor = -1,
 		focused = false,
@@ -15,7 +15,15 @@ const function new(): types.TextField
 		submitted = false,
 		state = Enum.GuiState.Idle,
 	} :: types.TextField
-	self.primitives = { { kind = "text_field", bounds = self.bounds, text_field = self } }
+
+	self.primitives = {
+		{
+			kind = "text_field",
+			bounds = self.bounds,
+			text_field = self,
+		},
+	}
+
 	return self
 end
 

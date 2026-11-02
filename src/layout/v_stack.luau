@@ -5,27 +5,27 @@ const translate_into = require("./translate_into")
 const types = require("../types")
 
 --- Arranges composites top to bottom, optionally aligning them within the longest one.
-const function v_stack(composites: { types.Composite }, gap: number?, align: number?): types.Composite
+const function v_stack(cs: { types.Composite }, gap: number?, align: number?): types.Composite
 	const spacing = gap or 0
-	const count = #composites
+	const count = #cs
 	if count == 0 then
 		return { primitives = {}, bounds = Rect.new() }
 	end
 
 	local left, column_width = math.huge, 0
 	if align then
-		for _, c in composites do
+		for _, c in cs do
 			left = math.min(left, c.bounds.Min.X)
 			column_width = math.max(column_width, c.bounds.Width)
 		end
 	end
 
 	const primitives = {}
-	const start_y = composites[1].bounds.Min.Y
+	const start_y = cs[1].bounds.Min.Y
 	local y = start_y
 	local min_x, max_x = math.huge, -math.huge
 
-	for _, c in composites do
+	for _, c in cs do
 		const b = c.bounds
 		const dx = if align then left + (column_width - b.Width) * align - b.Min.X else 0
 		translate_into(c, dx, y - b.Min.Y, primitives)

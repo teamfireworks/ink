@@ -13,7 +13,7 @@ export type HitState = {
 
 const ZERO_RECT = Rect.new()
 
-const function new_hit_region(bounds: Rect, options: types.HitRegionOptions?): types.HitRegion
+const function new(bounds: Rect, options: types.HitRegionOptions?): types.HitRegion
 	const self = {
 		bounds = ZERO_RECT,
 		state = Enum.GuiState.Idle,
@@ -37,7 +37,7 @@ end
 
 --- Creates an invisible interactive region.
 const function hit_region(s: types.Scope, bounds: Rect, options: types.HitRegionOptions?): types.HitRegion
-	return s:get<<types.HitRegion?>>(nil) or s:set(new_hit_region(bounds, options))
+	return s:get<<types.HitRegion?>>(nil) or s:set(new(bounds, options))
 end
 
 return hit_region

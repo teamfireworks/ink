@@ -95,20 +95,19 @@ export type Primitive = {
 export type Composite = {
 	primitives: { Primitive },
 	bounds: Rect,
-	hitbox_scope: scope.Scope?,
 }
 
 export type Length = number | { read fr: number }
 
 -- Inputs
 
-export type IntentSource = {
+export type InputSource = {
 	read InputBegan: RBXScriptSignal<InputObject>,
 	read InputChanged: RBXScriptSignal<InputObject>,
 	read InputEnded: RBXScriptSignal<InputObject>,
 }
 
-export type Intent = {
+export type InputFrame = {
 	pointer: Vector2,
 	pointer_delta: Vector2,
 	down: boolean,
@@ -119,7 +118,7 @@ export type Intent = {
 	keys_pressed: { [Enum.KeyCode]: boolean },
 }
 
-export type IntentState = {
+export type InputState = {
 	hit_regions: { Primitive },
 	active: HitRegion?,
 }

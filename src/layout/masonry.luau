@@ -5,13 +5,8 @@ const translate_into = require("./translate_into")
 const types = require("../types")
 
 --- Places each composite in whichever column is currently shortest.
-const function masonry(
-	composites: { types.Composite },
-	columns: number,
-	column_width: number,
-	gap: number
-): types.Composite
-	if #composites == 0 then
+const function masonry(cs: { types.Composite }, columns: number, column_width: number, gap: number): types.Composite
+	if #cs == 0 then
 		return { primitives = {}, bounds = Rect.new() }
 	end
 
@@ -19,7 +14,7 @@ const function masonry(
 	const primitives = {}
 	local max_x, max_y = 0, 0
 
-	for _, c in composites do
+	for _, c in cs do
 		local column = 1
 		for i = 2, columns do
 			if heights[i] < heights[column] then
