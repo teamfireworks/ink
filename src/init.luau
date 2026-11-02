@@ -14,6 +14,7 @@ const expensive = require("@self/state/expensive")
 const gradient = require("@self/styling/gradient")
 const h_stack = require("@self/layout/h_stack")
 const hit_region = require("@self/inputs/hit_region")
+local hoarcekat_story = require("@self/render/hoarcekat_story")
 const image = require("@self/composites/image")
 const input_collector = require("@self/inputs/input_collector")
 const inset_rect = require("@self/rects/inset_rect")
@@ -157,5 +158,6 @@ ink.destroy = destruction.destroy
 ink.renderer = renderer.new
 ink.mount = mount
 ink.ui_labs_story = ui_labs_story
+ink.hoarcekat_story = hoarcekat_story
 
 return table.freeze(ink)

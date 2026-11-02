@@ -1,4 +1,4 @@
 return {
-	name = "Ink Examples",
-	storyRoots = { (script.Parent :: any).Parent },
+	name = "ink",
+	storyRoots = { assert(script.Parent, "Luau").Parent },
 }
