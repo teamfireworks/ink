@@ -30,8 +30,10 @@ const mount = require("@self/render/mount")
 const pad_all = require("@self/layout/pad_all")
 const pad_sides = require("@self/layout/pad_sides")
 const pad_xy = require("@self/layout/pad_xy")
+local place = require("@self/layout/place")
 const rect = require("@self/rects/rect")
 const rect_sized = require("@self/rects/rect_sized")
+local rect_squared = require("@self/rects/rect_squared")
 const renderer = require("@self/render/renderer")
 const resolve_input = require("@self/inputs/resolve_input")
 const rotate = require("@self/styling/rotate")
@@ -40,6 +42,7 @@ const scope = require("@self/state/scope")
 const shadow = require("@self/styling/shadow")
 const solid = require("@self/composites/solid")
 const spring = require("@self/animation/spring")
+local stack_layout = require("@self/layout/stack_layout")
 const stroke = require("@self/styling/stroke")
 const text = require("@self/composites/text")
 const text_field = require("@self/inputs/text_field")
@@ -50,6 +53,7 @@ const tween = require("@self/animation/tween")
 const types = require("@self/types")
 const ui_labs_story = require("@self/render/ui_labs_story")
 const union_rects = require("@self/rects/union_rects")
+local units = require("@self/units")
 const v_stack = require("@self/layout/v_stack")
 local version = require("@self/version")
 const visible_range = require("@self/layout/visible_range")
@@ -78,6 +82,8 @@ export type InputCollector = input_collector.InputCollector
 export type Scope = scope.Scope
 export type Context<T> = context.Context<T>
 
+export type Units = units.Units
+
 export type Renderer = renderer.Renderer
 export type Story<C = nil> = types.Story<C>
 export type StoryProperties<C = nil> = types.StoryProperties<C>
@@ -103,6 +109,8 @@ ink.resolve_input = resolve_input
 ink.compose = compose
 ink.translate = translate
 ink.align = align
+ink.place = place
+ink.stack_layout = stack_layout
 ink.h_stack = h_stack
 ink.v_stack = v_stack
 ink.masonry = masonry
@@ -111,6 +119,10 @@ ink.pad_all = pad_all
 ink.pad_sides = pad_sides
 ink.pad_xy = pad_xy
 ink.clip = clip
+
+ink.ALIGN_START = 0
+ink.ALIGN_MID = 0.5
+ink.ALIGN_END = 1
 
 -- Styling
 ink.tint = tint
@@ -123,6 +135,7 @@ ink.shadow = shadow
 -- Rects
 ink.rect = rect
 ink.rect_sized = rect_sized
+ink.rect_squared = rect_squared
 ink.inset_rect = inset_rect
 ink.inset_rect_xy = inset_rect_xy
 ink.inset_rect_sides = inset_rect_sides
@@ -133,6 +146,12 @@ ink.is_in_rect = is_in_rect
 ink.aspect_fit = aspect_fit
 ink.aspect_cover = aspect_cover
 ink.distribute = distribute
+
+-- Units
+ink.units = units.context
+ink.px = units.px
+ink.rem = units.rem
+ink.viewport_scale = units.viewport_scale
 
 -- Animation
 ink.color = color

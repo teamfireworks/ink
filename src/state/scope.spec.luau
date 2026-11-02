@@ -262,7 +262,7 @@ describe("scope", function()
 				ran = true
 			end)
 			a:on_cleanup(function()
-				error("cleanup failed") -- registered last, so it runs first
+				error("cleanup failed")
 			end)
 			purge_unrequested(s)
 			expect(ran).toBe(true)

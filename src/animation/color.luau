@@ -20,6 +20,10 @@ end
 local color = {
 	WHITE = Color3.new(1, 1, 1),
 	BLACK = Color3.new(0, 0, 0),
+
+	INK_BLACK = Color3.fromHex("#413333"),
+	INK_WHITE = Color3.fromHex("#F4EBDD"),
+	INK_ORANGE = Color3.fromHex("#F2765E"),
 }
 
 function color.linear_srgb_to_oklab(c: Vector3): Vector3

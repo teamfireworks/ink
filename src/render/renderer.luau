@@ -78,7 +78,8 @@ const PRIMITIVE_RENDERERS: { [types.PrimitiveKind]: PrimitiveRenderer } = {
 			write(pool, "Font", style.font)
 			write(pool, "TextColor3", primitive.color or DEFAULT_COLOR_FG)
 			write(pool, "TextTransparency", primitive.transparency or 0)
-			write(pool, "TextWrapped", primitive.text_wrapped == true)
+			write(pool, "TextWrapped", style.max_width ~= nil)
+			write(pool, "TextXAlignment", style.align_x or Enum.TextXAlignment.Left)
 		end,
 	},
 
@@ -137,7 +138,7 @@ const PRIMITIVE_RENDERERS: { [types.PrimitiveKind]: PrimitiveRenderer } = {
 			const box = pool.instance :: TextBox
 			const field = primitive.text_field :: types.TextField
 			const style = primitive.text_style :: types.TextStyle
-			const options = primitive.text_field_options :: types.TextFieldOptions
+			const options = primitive.text_field_options or {} :: types.TextFieldOptions
 
 			write(pool, "TextSize", style.size)
 			write(pool, "Font", style.font)
@@ -145,6 +146,7 @@ const PRIMITIVE_RENDERERS: { [types.PrimitiveKind]: PrimitiveRenderer } = {
 			write(pool, "TextTransparency", primitive.transparency or 0)
 			write(pool, "MultiLine", options.multiline == true)
 			write(pool, "TextWrapped", options.multiline == true)
+			write(pool, "TextXAlignment", style.align_x or Enum.TextXAlignment.Left)
 			write(
 				pool,
 				"TextYAlignment",
@@ -226,7 +228,7 @@ const MODIFIERS: { [string]: Modifier } = {
 			write(pool, "Color", style.color or DEFAULT_COLOR_FG)
 			write(pool, "Inset", style.inset or false)
 			write(pool, "Mode", style.mode)
-			write(pool, "Radius", UDim.new(0, style.radius))
+			write(pool, "BlurRadius", UDim.new(0, style.radius))
 			write(pool, "ShowBehindParent", style.show_behind_parent or false)
 			write(pool, "Spread", UDim2.fromOffset(style.spread_x or 0, style.spread_y or 0))
 			write(pool, "Transparency", style.transparency or 0)

@@ -11,7 +11,7 @@ const function hoarcekat_story(story: types.Story<nil>): (target: GuiObject) -> 
 		catcher.BackgroundTransparency = 1
 		catcher.Size = UDim2.fromScale(1, 1)
 		catcher.ZIndex = 2_000_000_000
-		catcher.Active = true
+		catcher.Active = false
 		catcher.Parent = target
 
 		const properties: types.StoryProperties<nil> = {

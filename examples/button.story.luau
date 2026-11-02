@@ -1,24 +1,28 @@
 const ink = require("../src")
 
-const BUTTON_STYLE: ink.TextStyle = {
-	size = 18,
-	font = Enum.Font.GothamBold,
-}
-
 const CONTROLS = {
 	label = "Continue Game",
-	color = Color3.fromHex("#18CB40"),
+	color = ink.color.INK_ORANGE,
 }
 
 return ink.ui_labs_story({
 	controls = CONTROLS,
 	render = function(properties: ink.StoryProperties<typeof(CONTROLS)>)
-		local content = {
-			ink.image(ink.rect_sized(24, 24), "rbxassetid://8517323790"),
-			ink.align(ink.text(properties.controls.label, BUTTON_STYLE), ink.rect_sized(0, 24), nil, 0.5),
-		}
-		content = ink.h_stack(content, 8)
-		content = ink.pad_xy(content, 16, 12)
+		local s = properties.scope:key("button")
+
+		local content_height = ink.rem(s, 1.25)
+		local text_style = ink.expensive(s, function(_, text_size: number): ink.TextStyle
+			return {
+				size = text_size,
+				font = Enum.Font.GothamBold,
+			}
+		end, content_height)
+
+		local content = ink.h_stack({
+			ink.image(ink.rect_squared(content_height), "rbxassetid://8517323790"),
+			ink.text(properties.controls.label, text_style),
+		}, ink.rem(s, 0.5), ink.ALIGN_MID)
+		content = ink.pad_xy(content, ink.rem(s, 1.25), ink.rem(s, 1))
 
 		local bg = ink.solid(content.bounds)
 		bg = ink.round(bg, 8)
@@ -41,7 +45,7 @@ return ink.ui_labs_story({
 		local surface = ink.compose({ bg, content })
 		local inset = ink.tween(
 			properties.scope:key("inset"),
-			hit.state == Enum.GuiState.Press and 4 or 8,
+			ink.rem(s, hit.state == Enum.GuiState.Press and 0.25 or 0.5),
 			0.1,
 			Enum.EasingStyle.Quint
 		)

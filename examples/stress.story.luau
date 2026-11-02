@@ -1,6 +1,6 @@
 const ink = require("../src")
 
-const CELL_COUNT = 100
+const CELL_COUNT = 50
 const CELL_GAP = 2
 const CYCLES_PER_SECOND = 8
 

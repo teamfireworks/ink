@@ -14,8 +14,8 @@ scope.__index = scope
 export type Scope = setmetatable<{
 	shared: Shared,
 	flipped_on: number,
-	previous: { [string]: any },
-	current: { [string]: any },
+	previous: { [string | number]: any },
+	current: { [string | number]: any },
 	value: unknown,
 	pending: unknown,
 	pending_frame: number?,
@@ -98,7 +98,7 @@ const function flip(self: Scope)
 	end
 end
 
-function scope.key(self: Scope, name: string): Scope
+function scope.key(self: Scope, name: string | number): Scope
 	assert(not self.purged, "Can't key a scope that was purged")
 	flip(self)
 	local child = self.current[name]

@@ -48,6 +48,8 @@ export type RoundStyle = {
 export type TextStyle = {
 	size: number,
 	font: Enum.Font,
+	max_width: number?,
+	align_x: Enum.TextXAlignment?,
 }
 
 export type ImageStyle = {
@@ -66,6 +68,7 @@ export type PrimitiveKind = "solid" | "text" | "image" | "hit_region" | "text_fi
 
 export type Primitive = {
 	kind: PrimitiveKind,
+
 	bounds: Rect,
 	clip: Rect?,
 
