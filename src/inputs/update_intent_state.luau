@@ -7,7 +7,7 @@ const types = require("../types")
 
 --- Updates hotspot states each frame from the latest input, using last frame's hotspots.
 const function update_intent_state(state: types.IntentState, intent: types.Intent)
-	for _, primitive in state.hotspots do
+	for _, primitive in state.hit_regions do
 		const hit_region = assert(primitive.hit_region, "Missing hit region")
 		hit_region.state = Enum.GuiState.Idle
 		hit_region.clicked = false
@@ -16,8 +16,8 @@ const function update_intent_state(state: types.IntentState, intent: types.Inten
 	end
 
 	local hover, wheel_target = nil, nil
-	for i = #state.hotspots, 1, -1 do
-		const primitive = state.hotspots[i]
+	for i = #state.hit_regions, 1, -1 do
+		const primitive = state.hit_regions[i]
 		const bounds = if primitive.clip then intersect_rects(primitive.bounds, primitive.clip) else primitive.bounds
 		if is_in_rect(bounds, intent.pointer) then
 			if hover == nil then

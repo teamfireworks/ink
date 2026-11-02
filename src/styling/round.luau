@@ -4,7 +4,7 @@ local types = require("../types")
 const function round(c: types.Composite, amount: number | types.RoundStyle): types.Composite
 	const new_primitives = table.create<<types.Primitive>>(#c.primitives)
 	const round: types.RoundStyle = type(amount) == "table" and amount
-		or { tl = amount, tr = amount, bl = amount, br = amount }
+		or { top_left = amount, top_right = amount, bottom_left = amount, bottom_right = amount }
 	for index, primitive in c.primitives do
 		primitive = table.clone(primitive)
 		primitive.round = round

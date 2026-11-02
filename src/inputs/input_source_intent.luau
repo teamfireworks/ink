@@ -30,7 +30,7 @@ end
 function input_source_intent.new(source: types.IntentSource, to_local: (Vector2) -> Vector2): InputSourceIntent
 	const self: InputSourceIntent = setmetatable({
 		pending = new_intent(),
-		state = { hotspots = {}, active = nil },
+		state = { hit_regions = {}, active = nil },
 		to_local = to_local,
 		screen_pointer = Vector2.zero,
 		last_pointer = Vector2.zero,
@@ -108,7 +108,7 @@ function input_source_intent.take(self: InputSourceIntent): types.Intent
 end
 
 function input_source_intent.commit(self: InputSourceIntent, composite: types.Composite)
-	const hotspots = self.state.hotspots
+	const hotspots = self.state.hit_regions
 	table.clear(hotspots)
 	for _, primitive in composite.primitives do
 		const hit = primitive.hit_region
@@ -124,7 +124,7 @@ function input_source_intent.destroy(self: InputSourceIntent)
 		connection:Disconnect()
 	end
 	table.clear(self.connections)
-	table.clear(self.state.hotspots)
+	table.clear(self.state.hit_regions)
 	self.state.active = nil
 end
 

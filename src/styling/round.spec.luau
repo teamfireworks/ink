@@ -14,10 +14,10 @@ describe("round", function()
 
 	it("rounds every corner by a number", function()
 		const r = round(c, 8).primitives[1].round :: any
-		expect(r.tl).toBe(8)
-		expect(r.tr).toBe(8)
-		expect(r.bl).toBe(8)
-		expect(r.br).toBe(8)
+		expect(r.top_left).toBe(8)
+		expect(r.top_right).toBe(8)
+		expect(r.bottom_left).toBe(8)
+		expect(r.bottom_right).toBe(8)
 	end)
 
 	it("applies to every primitive", function()
@@ -26,7 +26,7 @@ describe("round", function()
 	end)
 
 	it("uses a corner table as given", function()
-		const style: types.RoundStyle = { tl = 8, tr = 8, bl = 0, br = 0 }
+		const style: types.RoundStyle = { top_left = 8, top_right = 8, bottom_left = 0, bottom_right = 0 }
 		expect(round(c, style).primitives[1].round).toBe(style)
 	end)
 

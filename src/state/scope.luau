@@ -68,9 +68,10 @@ function scope.once<T>(self: Scope, init: () -> T): T
 	return self.value :: T
 end
 
-function scope.set<T>(self: Scope, value: T)
+function scope.set<T>(self: Scope, value: T): T
 	self.pending = value
 	self.pending_frame = self:frame()
+	return value
 end
 
 function scope.get<T>(self: Scope, default: T): T

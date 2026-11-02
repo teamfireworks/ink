@@ -86,7 +86,7 @@ describe("spring", function()
 		const s = scope.new()
 		step(s, ColorSequenceKeypoint.new(0, Color3.new(1, 0, 0)))
 		const k = step(s, ColorSequenceKeypoint.new(1, Color3.new(0, 0, 1)), 1 / 1000)
-		-- one millisecond in, the colour should still be almost pure red
+		-- one millisecond in, the color should still be almost pure red
 		expect(k.Value.R > 0.9).toBe(true)
 		expect(k.Value.B < 0.1).toBe(true)
 	end)

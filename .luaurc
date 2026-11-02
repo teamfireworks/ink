@@ -1,6 +1,7 @@
 {
 	"languageMode": "strict",
 	"lint": { "*": true },
+	"typeErrors": true,
 	"aliases": {
 		"lest": ".lest/core",
 		"lune": "~/.lune/.typedefs/0.11.1/"

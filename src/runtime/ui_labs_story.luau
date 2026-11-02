@@ -1,8 +1,8 @@
 local RunService = game:GetService("RunService")
 
-local gui_object_renderer = require("./gui_object_renderer")
 local input_source_intent = require("../inputs/input_source_intent")
 local rect_sized = require("../rects/rect_sized")
+local renderer = require("./renderer")
 local scope = require("../state/scope")
 local types = require("../types")
 local update_intent_state = require("../inputs/update_intent_state")
@@ -37,7 +37,7 @@ const function ui_lab_story<C>(story: types.Story<C>): GenericStory<C>
 		controls = story.controls,
 		render = function(generic_properties)
 			const root_scope = scope.new()
-			const renderer = gui_object_renderer.new(generic_properties.target)
+			const renderer = renderer.new(generic_properties.target)
 
 			const catcher = Instance.new("Frame")
 			catcher.Name = "InkInputCatcher"

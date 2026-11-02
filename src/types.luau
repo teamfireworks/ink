@@ -8,11 +8,41 @@ export type Pack<T = unknown> = { [number]: T, n: number }
 
 -- Styling
 
+export type GradientStyle = {
+	color: ColorSequence?,
+	offset_x: number?,
+	offset_y: number?,
+	rotation: number?,
+	scale: number?,
+	tile: Enum.GradientTileMode?,
+	transparency: NumberSequence?,
+	type: Enum.GradientType?,
+}
+
+export type StrokeStyle = {
+	color: Color3?,
+	gradient: GradientStyle?,
+	mode: Enum.ApplyStrokeMode?,
+	thickness: number?,
+	transparency: number?,
+}
+
+export type ShadowStyle = {
+	color: Color3?,
+	inset: boolean?,
+	mode: Enum.ApplyShadowMode,
+	radius: number?,
+	show_behind_parent: boolean?,
+	spread_x: number?,
+	spread_y: number?,
+	transparency: number?,
+}
+
 export type RoundStyle = {
-	tl: number?,
-	tr: number?,
-	bl: number?,
-	br: number?,
+	top_left: number?,
+	top_right: number?,
+	bottom_left: number?,
+	bottom_right: number?,
 }
 
 export type TextStyle = {
@@ -32,19 +62,32 @@ export type ImageStyle = {
 
 -- Composites
 
+export type PrimitiveKind = "solid" | "text" | "image" | "hit_region" | "text_field"
+
 export type Primitive = {
+	kind: PrimitiveKind,
 	bounds: Rect,
 	clip: Rect?,
 
 	color: Color3?,
 	transparency: number?,
-	round: RoundStyle?,
 	rotation: number?,
+
+	round: RoundStyle?,
+	gradient: GradientStyle?,
+	shadow: ShadowStyle?,
+	stroke: StrokeStyle?,
 
 	text: string?,
 	text_style: TextStyle?,
+	text_wrapped: boolean?,
+
+	text_field: TextField?,
+	text_field_options: TextFieldOptions?,
+
 	image: string?,
 	image_style: ImageStyle?,
+
 	hit_region: HitRegion?,
 	hit_region_wheel: boolean?,
 }
@@ -57,9 +100,7 @@ export type Composite = {
 
 export type Length = number | { read fr: number }
 
--- Runtime
-
-export type Scope = scope.Scope
+-- Inputs
 
 export type IntentSource = {
 	read InputBegan: RBXScriptSignal<InputObject>,
@@ -79,11 +120,12 @@ export type Intent = {
 }
 
 export type IntentState = {
-	hotspots: { Primitive },
+	hit_regions: { Primitive },
 	active: HitRegion?,
 }
 
-export type HitRegion = {
+export type HitRegionOptions = { wheel: boolean? }
+export type HitRegion = Composite & {
 	state: Enum.GuiState,
 	clicked: boolean,
 	wheel: number,
@@ -92,13 +134,25 @@ export type HitRegion = {
 	bounds: Rect,
 }
 
-export type HitRegionOptions = {
-	wheel: boolean?,
+export type TextFieldOptions = { multiline: boolean?, editable: boolean? }
+export type TextField = Composite & {
+	value: string,
+	selection_start: number,
+	selection_cursor: number,
+	focused: boolean,
+	changed: boolean,
+	submitted: boolean,
+	state: Enum.GuiState,
+
+	pending_value: string?,
+	pending_selection_start: number?,
+	pending_selection_cursor: number?,
+	pending_focus: boolean?,
 }
 
-export type TextFieldOptions = {
-	style: TextStyle,
-}
+-- Runtime
+
+export type Scope = scope.Scope
 
 export type function ProcessControls(controls: type): type
 	const CONTROL_VALUE = types.singleton("ControlValue")

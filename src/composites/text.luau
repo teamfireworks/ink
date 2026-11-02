@@ -9,6 +9,7 @@ const function text(content: string, style: types.TextStyle, max_width: number?)
 	const bounds = Rect.new(Vector2.zero, size)
 
 	const primitive: types.Primitive = {
+		kind = "text",
 		bounds = bounds,
 		text = content,
 		text_style = style,

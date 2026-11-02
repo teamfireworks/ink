@@ -26,7 +26,7 @@ return ink.ui_labs_story({
 		local shadow = ink.solid(content.bounds)
 		shadow = ink.round(shadow, 8)
 
-		local hit, region = ink.hit_region(properties.scope:key("hitbox"), bg.bounds)
+		local hit = ink.hit_region(properties.scope:key("hitbox"), bg.bounds)
 
 		const target_bg = if hit.state == Enum.GuiState.Hover
 			then ink.color.shade(properties.controls.color, 0.05)
@@ -55,7 +55,7 @@ return ink.ui_labs_story({
 		end
 		count_scope:set(count)
 
-		local button = ink.compose({ shadow, surface, region }, shadow.bounds)
+		local button = ink.compose({ shadow, surface, hit }, shadow.bounds)
 		button = ink.align(button, properties.target_bounds, 0.5, 0.5)
 
 		return button

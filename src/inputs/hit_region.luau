@@ -11,30 +11,33 @@ export type HitState = {
 	pointer: Vector2,
 }
 
-const function new_hit_region(): types.HitRegion
-	return {
+const ZERO_RECT = Rect.new()
+
+const function new_hit_region(bounds: Rect, options: types.HitRegionOptions?): types.HitRegion
+	const self = {
+		bounds = ZERO_RECT,
 		state = Enum.GuiState.Idle,
 		clicked = false,
 		wheel = 0,
 		drag = Vector2.zero,
 		pointer = Vector2.zero,
-		bounds = Rect.new(),
+	} :: types.HitRegion
+
+	self.primitives = {
+		{
+			kind = "hit_region",
+			bounds = bounds,
+			hit_region = self,
+			hit_region_wheel = options ~= nil and options.wheel == true,
+		},
 	}
+
+	return self
 end
 
 --- Creates an invisible interactive region.
-const function hit_region(
-	s: types.Scope,
-	bounds: Rect,
-	options: types.HitRegionOptions?
-): (types.HitRegion, types.Composite)
-	const hit = s:once(new_hit_region)
-	const primitive: types.Primitive = {
-		bounds = bounds,
-		hit_region = hit,
-		hit_region_wheel = options ~= nil and options.wheel == true,
-	}
-	return hit, { primitives = { primitive }, bounds = bounds }
+const function hit_region(s: types.Scope, bounds: Rect, options: types.HitRegionOptions?): types.HitRegion
+	return s:get<<types.HitRegion?>>(nil) or s:set(new_hit_region(bounds, options))
 end
 
 return hit_region

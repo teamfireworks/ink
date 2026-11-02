@@ -85,7 +85,7 @@ const ink = table.freeze({
 
 	-- Runtime
 	ui_labs_story = require("@self/runtime/ui_labs_story"),
-	gui_object_renderer = require("@self/runtime/gui_object_renderer"),
+	renderer = require("@self/runtime/renderer").new,
 })
 
 return ink
