@@ -16,12 +16,14 @@ const function mount(
 	end)
 
 	const function render(dt: number)
-		debug.profilebegin("ink: mount -> render")
+		debug.profilebegin("InkCompositing")
 		root:next(dt)
 		input:advance()
 		const size = target.AbsoluteSize
 		const composite = render_ui(root, rect_sized(size.X, size.Y))
 		input:commit(composite)
+		debug.profileend()
+		debug.profilebegin("InkRendering")
 		view:render(composite)
 		debug.profileend()
 	end

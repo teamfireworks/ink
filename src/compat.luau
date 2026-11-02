@@ -1,9 +1,8 @@
+local log = require("./runtime/log")
 const is_lune, lune_roblox = pcall(require, "@lune/roblox")
 
 const function polyfill(api: string): never
-	return if is_lune
-		then lune_roblox[api] or error(`@lune/roblox doesn't provide {api}`)
-		else error(`Runtime doesn't provide {api} as a global`)
+	return is_lune and lune_roblox[api] or log.error(log.messages.unsupported_api(api))
 end
 
 const compat = {

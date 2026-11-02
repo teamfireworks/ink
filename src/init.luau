@@ -14,7 +14,7 @@ const expensive = require("@self/state/expensive")
 const gradient = require("@self/styling/gradient")
 const h_stack = require("@self/layout/h_stack")
 const hit_region = require("@self/inputs/hit_region")
-local hoarcekat_story = require("@self/render/hoarcekat_story")
+local hoarcekat_story = require("@self/runtime/hoarcekat_story")
 const image = require("@self/composites/image")
 const input_collector = require("@self/inputs/input_collector")
 const inset_rect = require("@self/rects/inset_rect")
@@ -24,9 +24,10 @@ const intersect_rects = require("@self/rects/intersect_rects")
 const is_equal_rects = require("@self/rects/is_equal_rects")
 const is_in_rect = require("@self/rects/is_in_rect")
 const lerp = require("@self/animation/lerp")
+local log = require("@self/runtime/log")
 const map_primitives = require("@self/composites/map_primitives")
 const masonry = require("@self/layout/masonry")
-const mount = require("@self/render/mount")
+const mount = require("@self/runtime/mount")
 const pad_all = require("@self/layout/pad_all")
 const pad_sides = require("@self/layout/pad_sides")
 const pad_xy = require("@self/layout/pad_xy")
@@ -34,7 +35,7 @@ local place = require("@self/layout/place")
 const rect = require("@self/rects/rect")
 const rect_sized = require("@self/rects/rect_sized")
 local rect_squared = require("@self/rects/rect_squared")
-const renderer = require("@self/render/renderer")
+const renderer = require("@self/runtime/renderer")
 const resolve_input = require("@self/inputs/resolve_input")
 const rotate = require("@self/styling/rotate")
 const round = require("@self/styling/round")
@@ -51,9 +52,9 @@ const tint = require("@self/styling/tint")
 const translate = require("@self/layout/translate")
 const tween = require("@self/animation/tween")
 const types = require("@self/types")
-const ui_labs_story = require("@self/render/ui_labs_story")
+const ui_labs_story = require("@self/runtime/ui_labs_story")
 const union_rects = require("@self/rects/union_rects")
-local units = require("@self/units")
+local units = require("@self/layout/units")
 const v_stack = require("@self/layout/v_stack")
 local version = require("@self/version")
 const visible_range = require("@self/layout/visible_range")
@@ -79,7 +80,7 @@ export type InputFrame = types.InputFrame
 export type InputState = types.InputState
 export type InputCollector = input_collector.InputCollector
 
-export type Scope = scope.Scope
+export type Scope = types.Scope
 export type Context<T> = context.Context<T>
 
 export type Units = units.Units
@@ -120,8 +121,18 @@ ink.pad_sides = pad_sides
 ink.pad_xy = pad_xy
 ink.clip = clip
 
+ink.units = units.context
+ink.px = units.px
+ink.rem = units.rem
+ink.viewport_scale = units.viewport_scale
+
+--- Aligns items at the start of bounds.
 ink.ALIGN_START = 0
+
+--- Aligns items at the middle of bounds.
 ink.ALIGN_MID = 0.5
+
+--- Aligns items at the end of bounds.
 ink.ALIGN_END = 1
 
 -- Styling
@@ -147,12 +158,6 @@ ink.aspect_fit = aspect_fit
 ink.aspect_cover = aspect_cover
 ink.distribute = distribute
 
--- Units
-ink.units = units.context
-ink.px = units.px
-ink.rem = units.rem
-ink.viewport_scale = units.viewport_scale
-
 -- Animation
 ink.color = color
 ink.lerp = lerp
@@ -173,10 +178,11 @@ ink.destroy_methods = destruction.destroy_methods
 ink.destroy_types = destruction.destroy_types
 ink.destroy = destruction.destroy
 
--- Render
+-- Runtime
 ink.renderer = renderer.new
 ink.mount = mount
 ink.ui_labs_story = ui_labs_story
 ink.hoarcekat_story = hoarcekat_story
+ink.log = log
 
 return table.freeze(ink)

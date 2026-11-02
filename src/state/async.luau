@@ -1,4 +1,5 @@
 local compat = require("../compat")
+local log = require("../runtime/log")
 const task = compat.task
 
 const is_equal_packs = require("./is_equal_packs")
@@ -31,7 +32,6 @@ const function run<T, A...>(state: State<T>, generation: number, compute: Comput
 		end
 	end
 
-	-- TODO better error handling
 	const ok, result = pcall(compute, become, ...)
 
 	if state.generation ~= generation then
@@ -43,7 +43,7 @@ const function run<T, A...>(state: State<T>, generation: number, compute: Comput
 		state.value = result
 		state.done = true
 	else
-		task.spawn(error, result, 0)
+		log.warn(log.messages.callback_errored("async", result))
 	end
 end
 

@@ -1,5 +1,5 @@
-const context = require("./state/context")
-const types = require("./types")
+const context = require("../state/context")
+const types = require("../types")
 
 export type Units = { scale: number, rem: number }
 

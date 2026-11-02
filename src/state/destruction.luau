@@ -1,3 +1,4 @@
+local log = require("../runtime/log")
 const destruction = {}
 destruction.destroy_methods = {
 	"Destroy",
@@ -17,16 +18,16 @@ destruction.destroy_types = {
 
 	["function"] = function(fn: () -> ())
 		local co = coroutine.create(fn)
-		local success, result = coroutine.resume(co)
+		local success = coroutine.resume(co)
 
-		if not success or coroutine.status(co) ~= "dead" then
+		if success then
+			-- fallthrough
+		elseif coroutine.status(co) ~= "dead" then
 			local source, line, name = debug.info(fn, "sln")
-			name = if name == "" or name == nil then "Anonymous function" else "Function " .. name :: string
-			if success then
-				warn(name, "from line", line, "of", source, "attempted to yield during cleanup")
-			else
-				warn(name, "from line", line, "of", source, "errored while cleaning up:", result)
-			end
+			log.warn(log.messages.cleanup_error(name, line, source))
+		else
+			local source, line, name = debug.info(fn, "sln")
+			log.warn(log.messages.cleanup_yielded(name, line, source))
 		end
 	end,
 

@@ -329,8 +329,6 @@ const function init_clip(pool: PoolInstance)
 end
 
 function renderer.render(self: Renderer, composite: types.Composite)
-	debug.profilebegin("ink: InstanceRenderer -> render")
-
 	for _, pool in self.pools do
 		pool.used = 0
 	end
@@ -384,8 +382,6 @@ function renderer.render(self: Renderer, composite: types.Composite)
 			self.text_fields[field] = nil
 		end
 	end
-
-	debug.profileend()
 end
 
 function renderer.destroy(self: Renderer)

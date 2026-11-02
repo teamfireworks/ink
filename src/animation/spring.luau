@@ -1,3 +1,4 @@
+local log = require("../runtime/log")
 const pack_types = require("./datatypes/pack_types")
 const spring_coefficients = require("./spring_coefficients")
 const types = require("../types")
@@ -23,7 +24,9 @@ const function spring<T>(s: types.Scope, target: T, speed: number?, damping: num
 	const state = s:once(new_state<<T>>)
 	const kind = typeof(target)
 	const pack, unpack = pack_types[kind], unpack_types[kind]
-	assert(pack and unpack, `Cannot spring a {kind}`)
+	if not pack or not unpack then
+		return log.error(log.messages.cannot_animate(kind))
+	end
 
 	if state.kind ~= kind then
 		state.kind = kind

@@ -1,6 +1,7 @@
 local TweenService = game:GetService("TweenService")
 
 local lerp_types = require("./datatypes/lerp_types")
+local log = require("../runtime/log")
 local scope = require("../state/scope")
 
 export type State<T> = {
@@ -32,7 +33,7 @@ const function tween<T>(
 	const state = s:once(new_state<<T>>)
 	const now = s:time()
 	const kind = typeof(goal)
-	const lerp = lerp_types[kind] or error(`Cannot tween a {kind}`)
+	const lerp = lerp_types[kind] or log.error(log.messages.cannot_animate(kind))
 
 	if state.kind ~= kind then
 		state.kind, state.initial, state.goal, state.current, state.start = kind, goal, goal, goal, now

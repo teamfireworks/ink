@@ -1,4 +1,5 @@
 const destruction = require("./destruction")
+local log = require("../runtime/log")
 
 type Shared = {
 	frame: number,
@@ -99,7 +100,9 @@ const function flip(self: Scope)
 end
 
 function scope.key(self: Scope, name: string | number): Scope
-	assert(not self.purged, "Can't key a scope that was purged")
+	if self.purged then
+		return log.error(log.messages.scope_purged())
+	end
 	flip(self)
 	local child = self.current[name]
 	if child == nil then
@@ -115,7 +118,9 @@ function scope.key(self: Scope, name: string | number): Scope
 end
 
 function scope.on_cleanup<T>(self: Scope, item: T): T
-	assert(not self.purged, "Can't add a cleanup to a scope that was purged")
+	if self.purged then
+		return log.error(log.messages.scope_purged())
+	end
 	table.insert(self.cleanups, item)
 	return item
 end
