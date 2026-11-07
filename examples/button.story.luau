@@ -25,10 +25,10 @@ return ink.ui_labs_story({
 		content = ink.pad(content, ink.edges.xy(ink.rem(s, 1.25), ink.rem(s, 1)))
 
 		local bg = ink.solid(content.bounds)
-		bg = ink.round(bg, 8)
+		bg = ink.round(bg, ink.corners.all(ink.rem(s, 1)))
 
 		local shadow = ink.solid(content.bounds)
-		shadow = ink.round(shadow, 8)
+		shadow = ink.round(shadow, ink.corners.all(ink.rem(s, 1)))
 
 		local hit = ink.hit_region(properties.scope:key("hitbox"), bg.bounds)
 
