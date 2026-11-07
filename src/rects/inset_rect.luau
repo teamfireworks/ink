@@ -1,8 +1,14 @@
-local inset_rect_sides = require("./inset_rect_sides")
+const compat = require("../compat")
+const Rect = compat.Rect
 
---- Shrinks a rect by the same amount on every side.
-const function inset_rect(r: Rect, amount: number)
-	return inset_rect_sides(r, amount, amount, amount, amount)
+--- Shrinks a rect by a separate amount on each side.
+const function inset_sides(rect: Rect, top: number, left: number, bottom: number, right: number)
+	return Rect.new(
+		rect.Min.X + left,
+		rect.Min.Y + top,
+		math.max(rect.Max.X - right, rect.Min.X + left),
+		math.max(rect.Max.Y - bottom, rect.Min.Y + top)
+	)
 end
 
-return inset_rect
+return inset_sides

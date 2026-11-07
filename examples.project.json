@@ -3,11 +3,14 @@
 	"tree": {
 		"$className": "DataModel",
 		"ReplicatedStorage": {
-			"src": {
-				"$path": "./src"
-			},
-			"examples": {
-				"$path": "./examples"
+			"ink": {
+				"$className": "Folder",
+				"src": {
+					"$path": "./src"
+				},
+				"examples": {
+					"$path": "./examples"
+				}
 			}
 		}
 	}

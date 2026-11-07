@@ -22,7 +22,7 @@ return ink.ui_labs_story({
 			ink.image(ink.rect_squared(content_height), "rbxassetid://8517323790"),
 			ink.text(properties.controls.label, text_style),
 		}, ink.rem(s, 0.5), ink.ALIGN_MID)
-		content = ink.pad_xy(content, ink.rem(s, 1.25), ink.rem(s, 1))
+		content = ink.pad(content, ink.edges.xy(ink.rem(s, 1.25), ink.rem(s, 1)))
 
 		local bg = ink.solid(content.bounds)
 		bg = ink.round(bg, 8)
