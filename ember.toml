@@ -1,6 +1,6 @@
 [package]
 name = "teamfireworks/ink"
-version = "0.1.0-rc.6"
+version = "0.1.0-rc.7"
 description = "Roblox UI beyond the instance tree"
 authors = ["rniraclefire"]
 repository = "teamfireworks/ink"
